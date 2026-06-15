@@ -1,10 +1,6 @@
 TDE-2 sistemas-ciberfisicos Detecção e recuperação de impasses
 
-Relatório Técnico: Parte 1 — Jantar dos Filósofos
-
-
-Relatório Técnico: Parte 2 — Threads e Semáforos
-TABELA DE RESULTADOS: 
+## Resultados — Parte 1: Jantar dos Filósofos
 
 ## Resultados — Parte 2: Threads e Semáforos
 
@@ -31,5 +27,4 @@ TABELA DE RESULTADOS:
 -> no Python `aquire()` e `release()` funcionam como se fossem uma barreira de memoria: o `release()` força a escrita do valor atualizado na memoria principal, e o `acquire()` força a leitura desse valor atualizado. Garantindo que nenhuma thread use um valor desatualizado de `count` 
 
 
-
-Parte 3 — Deadlock
+## Resultados — Parte 3: Deadlock
