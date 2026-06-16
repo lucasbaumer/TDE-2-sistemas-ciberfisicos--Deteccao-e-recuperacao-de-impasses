@@ -10,7 +10,7 @@
 | Versão | Execução | Valor Esperado (T×N) | Valor Obtido (count) | Tempo de Execução |
 |---|---|---|---|---|
 | Sem Sincronização | #1 | 1.600.000 | 200.001 | 118.3386 s |
-| Sem Sincronização | #2 | 1.600.000 | 200.015 | 117.8420 s |
+| Sem Sincronização | #2 | 1.600.000 | 200.015 | 122.8420 s |
 | Sem Sincronização | #3 | 1.600.000 | 199.980 | 119.1050 s |
 | Com Semáforo | #1 | 1.600.000 | 1.600.000 | 991.4221 s |
 | Com Semáforo | #2 | 1.600.000 | 1.600.000 | 992.4221 s |
