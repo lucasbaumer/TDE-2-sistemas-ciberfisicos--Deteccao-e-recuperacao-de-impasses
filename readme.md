@@ -3,6 +3,10 @@ Equipe 9 /
 Integrantes: Lucas Baumer, Matheus Kormann, Vinicius Yudi /
 Linguagem escolhida: Python
 
+##Link Yutube
+(https://youtu.be/N8mMI1F6zOM)
+
+
 ## Resultados — Parte 1: Jantar dos Filósofos
 ### Variaveis utilizadas
 ```
@@ -19,7 +23,7 @@ Vezes que cada um comeu = 1
 | Corrigida | #2 | Terminou | 1.43 s |
 | Corrigida | #3 | Terminou | 0.904 s |
 
-### Resultodo com Conflito
+    ### Resultado com Conflito
  ```
  PS C:\Users\mathe\OneDrive\Documentos\PUCPR\7_Período\PSCF\TDE-2-sistemas-ciberfisicos--Deteccao-e-recuperacao-de-impasses> & C:\Users\mathe\AppData\Local\Programs\Python\Python313\python.exe c:/Users/mathe/OneDrive/Documentos/PUCPR/7_Período/PSCF/TDE-2-sistemas-ciberfisicos--Deteccao-e-recuperacao-de-impasses/PARTE1-FILOSOFOS/filosofos.py
 Jantar dos Filosofos 
