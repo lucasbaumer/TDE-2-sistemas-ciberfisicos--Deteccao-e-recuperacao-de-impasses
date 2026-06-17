@@ -20,14 +20,14 @@ def JantarComConflito(meuNumero):
 
         print("Filosofo", meuNumero, "esta com fome")
         garfoEsquerda.acquire()
-        time.sleep(0.1)
+        time.sleep(0.18)
         garfoDireita.acquire()
 
         print("Filosofo", meuNumero, "esta comendo")
         time.sleep(random.uniform(0.1, 0.5))
 
         garfoDireita.release()
-        garfoEsquerda.release()
+        garfoEsquerda.release() 
 
 
 def JantarSemConflito(meuNumero):
