@@ -9,7 +9,7 @@ def thread1_deadlock():
     LOCK_A.acquire()
     print("T1: adquiriu LOCK_A")
 
-    time.sleep(0.05)  # aumenta a chance do deadlock acontecer
+    time.sleep(0.05)
 
     print("T1: tentando adquirir LOCK_B")
     LOCK_B.acquire()

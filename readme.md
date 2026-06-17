@@ -203,4 +203,3 @@ python PARTE2-SEMAFORO/semaforo.py       # executa as duas versoes em sequencia
 # Parte 3 - Deadlock
 python PARTE3-DEADLOCK/deadlock.py       # digite 1 (trava) ou 2 (corrigida)
 ```
-Na Parte 3, a opção 1 não termina sozinha (deadlock proposital) — encerre com Ctrl+C após ver o diagnóstico.
