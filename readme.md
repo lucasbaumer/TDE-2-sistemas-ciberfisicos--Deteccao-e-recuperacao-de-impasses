@@ -1,11 +1,16 @@
-## TDE-2 sistemas-ciberfisicos Detecção e recuperação de impasses
-Equipe 9 /
-Integrantes: Lucas Baumer, Matheus Kormann, Vinicius Yudi /
-Linguagem escolhida: Python
+# TDE-2 — Sistemas Ciberfísicos: Detecção e Recuperação de Impasses
 
-##Link Yutube
-(https://youtu.be/N8mMI1F6zOM)
+**Equipe 9**
 
+**Integrantes:**
+- Lucas Baumer
+- Matheus Kormann
+- Vinicius Yudi
+
+**Linguagem escolhida:** Python
+
+## 🎥 Link do YouTube
+[https://youtu.be/N8mMI1F6zOM](https://youtu.be/N8mMI1F6zOM)
 
 ## Resultados — Parte 1: Jantar dos Filósofos
 ### Variaveis utilizadas
