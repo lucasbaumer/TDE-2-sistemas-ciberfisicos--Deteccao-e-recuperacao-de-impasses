@@ -1,7 +1,7 @@
 ## TDE-2 sistemas-ciberfisicos Detecção e recuperação de impasses
-## Equipe 9 
-## Integrantes: Lucas Baumer, Matheus Kormann, Vinicius Yudi
-## Linguagem escolhida: Python
+Equipe 9 
+Integrantes: Lucas Baumer, Matheus Kormann, Vinicius Yudi
+Linguagem escolhida: Python
 
 ## Resultados — Parte 1: Jantar dos Filósofos
 ### Variaveis utilizadas
@@ -104,13 +104,5 @@ Demorou 0.904 segundos
 
 ### D) Visibilidade entre threads em Python
 -> no Python `aquire()` e `release()` funcionam como se fossem uma barreira de memoria: o `release()` força a escrita do valor atualizado na memoria principal, e o `acquire()` força a leitura desse valor atualizado. Garantindo que nenhuma thread use um valor desatualizado de `count` 
-
-<<<<<<< HEAD
----
-=======
-## Para executar o Codigo entre na pasta `PARTE2-SEMAFORO`, e digite o comando `python semaforo.py` no terminal, dê pressione a tecla `Enter` e espere ele executar: o programa vai rodar os dois testes em sequência, e após cada execução retornará os logs de: valor esperado, valor obtido e tempo de execução, caso queira testar com outros valores ou reduzir o tempo de teste, mude as variáveis de dentro do bloco "if __name__ == "__main__":
-"T = 8 (Número de threads/operários)"
-"N = 200000 (Número de incrementos por thread)"
->>>>>>> 59c30ff406f685745b7815f83f150b85ba331338
 
 ## Resultados — Parte 3: Deadlock
