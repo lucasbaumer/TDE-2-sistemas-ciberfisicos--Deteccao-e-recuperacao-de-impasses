@@ -86,11 +86,11 @@ Demorou 0.904 segundos
 | Versão | Execução | Valor Esperado (T×N) | Valor Obtido (count) | Tempo de Execução |
 |---|---|---|---|---|
 | Sem Sincronização | #1 | 1.600.000 | 200.001 | 118.3386 s |
-| Sem Sincronização | #2 | 1.600.000 | 200.015 | 117.8420 s |
+| Sem Sincronização | #2 | 1.600.000 | 200.015 | 122.8420 s |
 | Sem Sincronização | #3 | 1.600.000 | 199.980 | 119.1050 s |
-| Com Semáforo | #1 | 1.600.000 | 1.600.000 | 135.4200 s |
-| Com Semáforo | #2 | 1.600.000 | 1.600.000 | 134.1500 s |
-| Com Semáforo | #3 | 1.600.000 | 1.600.000 | 136.8900 s |
+| Com Semáforo | #1 | 1.600.000 | 1.600.000 | 991.4221 s |
+| Com Semáforo | #2 | 1.600.000 | 1.600.000 | 992.4221 s |
+| Com Semáforo | #3 | 1.600.000 | 1.600.000 | 991.8921 s |
 
 ## DISCUSSÃO TÉCNICA - PARTE 2
 ## A) Por que a versão sem sincronização perde incrementos?
@@ -105,6 +105,12 @@ Demorou 0.904 segundos
 ### D) Visibilidade entre threads em Python
 -> no Python `aquire()` e `release()` funcionam como se fossem uma barreira de memoria: o `release()` força a escrita do valor atualizado na memoria principal, e o `acquire()` força a leitura desse valor atualizado. Garantindo que nenhuma thread use um valor desatualizado de `count` 
 
+<<<<<<< HEAD
 ---
+=======
+## Para executar o Codigo entre na pasta `PARTE2-SEMAFORO`, e digite o comando `python semaforo.py` no terminal, dê pressione a tecla `Enter` e espere ele executar: o programa vai rodar os dois testes em sequência, e após cada execução retornará os logs de: valor esperado, valor obtido e tempo de execução, caso queira testar com outros valores ou reduzir o tempo de teste, mude as variáveis de dentro do bloco "if __name__ == "__main__":
+"T = 8 (Número de threads/operários)"
+"N = 200000 (Número de incrementos por thread)"
+>>>>>>> 59c30ff406f685745b7815f83f150b85ba331338
 
 ## Resultados — Parte 3: Deadlock
