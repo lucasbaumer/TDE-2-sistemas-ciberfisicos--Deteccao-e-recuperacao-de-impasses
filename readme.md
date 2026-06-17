@@ -110,3 +110,100 @@ Demorou 0.904 segundos
 -> no Python `aquire()` e `release()` funcionam como se fossem uma barreira de memoria: o `release()` força a escrita do valor atualizado na memoria principal, e o `acquire()` força a leitura desse valor atualizado. Garantindo que nenhuma thread use um valor desatualizado de `count` 
 
 ## Resultados — Parte 3: Deadlock
+
+### Cenário
+```
+2 threads e 2 locks (A e B)
+Thread 1: adquire LOCK_A -> dorme 50ms -> adquire LOCK_B
+Thread 2 (versao que trava):   adquire LOCK_B -> dorme 50ms -> adquire LOCK_A
+Thread 2 (versao corrigida):   adquire LOCK_A -> dorme 50ms -> adquire LOCK_B
+```
+
+| Versão | Execução | Resultado | Tempo de Execução |
+|---|---|---|---|
+| Que Trava (deadlock) | #1 | deadlock | -.---- (não termina) |
+| Que Trava (deadlock) | #2 | deadlock | -.---- (não termina) |
+| Que Trava (deadlock) | #3 | deadlock | -.---- (não termina) |
+| Corrigida (hierarquia) | #1 | Terminou | 0.101 s |
+| Corrigida (hierarquia) | #2 | Terminou | 0.102 s |
+| Corrigida (hierarquia) | #3 | Terminou | 0.103 s |
+
+### Resultado da Versão que Trava (deadlock)
+O programa não termina sozinho. Uma thread de monitoramento (`threading.enumerate()`)
+diagnostica, após 2 segundos, que as duas threads continuam bloqueadas.
+```
+Atividade de Deadlock (2 threads, 2 locks)
+1 - Versao que TRAVA (deadlock)
+2 - Versao CORRIGIDA (hierarquia)
+Escolha: 1
+T1: tentando adquirir LOCK_A
+T1: adquiriu LOCK_A
+T2: tentando adquirir LOCK_B
+T2: adquiriu LOCK_B
+T1: tentando adquirir LOCK_B
+T2: tentando adquirir LOCK_A
+
+=== DIAGNOSTICO: POSSIVEL DEADLOCK ===
+Apos 2.0s ainda existem 2 thread(s) bloqueada(s):
+  -> MainThread | viva: True
+  -> Thread-1 | viva: True
+  -> Thread-2 | viva: True
+  -> Thread-1 (monitor) | viva: True
+O programa NAO termina sozinho (Ctrl+C para encerrar).
+```
+Observa-se que T1 segura A e espera B, enquanto T2 segura B e espera A: nenhuma
+das duas avança e o programa fica preso para sempre (foi encerrado por timeout).
+
+### Resultado da Versão Corrigida (hierarquia)
+```
+Atividade de Deadlock (2 threads, 2 locks)
+1 - Versao que TRAVA (deadlock)
+2 - Versao CORRIGIDA (hierarquia)
+Escolha: 2
+T1: tentando adquirir LOCK_A
+T1: adquiriu LOCK_A
+T2: tentando adquirir LOCK_A
+T1: tentando adquirir LOCK_B
+T1: adquiriu LOCK_B
+T1 concluiu
+T2: adquiriu LOCK_A
+T2: tentando adquirir LOCK_B
+T2: adquiriu LOCK_B
+T2 concluiu
+
+Executado: Versao corrigida (hierarquia)
+Demorou 0.101 segundos
+```
+Como as duas threads pedem os locks na MESMA ordem (sempre A antes de B), não
+existe mais o cruzamento de dependências: T2 simplesmente espera T1 terminar e
+liberar, e o programa conclui normalmente.
+
+## DISCUSSÃO TÉCNICA - PARTE 3
+
+## A) Como o deadlock é reproduzido?
+-> Usamos 2 threads e 2 locks. A Thread 1 pega o LOCK_A e depois tenta o LOCK_B; a Thread 2 pega o LOCK_B e depois tenta o LOCK_A. O `time.sleep(0.05)` entre as duas aquisições torna a corrida deterministica: garante que cada thread já segura o seu primeiro lock antes de tentar o segundo. Assim T1 fica esperando o B (que está com T2) e T2 fica esperando o A (que está com T1), formando um ciclo de espera. O programa nunca termina, o que é confirmado pela thread de monitoramento que lista as threads ainda vivas com `threading.enumerate()`.
+
+## B) Quais condições de Coffman se manifestaram?
+-> As quatro condições ocorrem ao mesmo tempo:
+- **Exclusão mútua**: cada lock só pode ser segurado por uma thread por vez.
+- **Manter-e-esperar (hold and wait)**: cada thread segura um lock e fica esperando o outro sem liberar o que já tem.
+- **Não preempção**: nenhuma thread tira o lock da outra à força; o lock só sai quando o dono libera.
+- **Espera circular**: T1 espera por T2 e T2 espera por T1, fechando o ciclo.
+
+## C) Qual condição de Coffman foi quebrada na correção?
+-> Quebramos a **espera circular** impondo uma **ordem global de aquisição (hierarquia de recursos)**: TODAS as threads adquirem sempre o LOCK_A antes do LOCK_B. Com uma ordem fixa e única, é impossível formar um ciclo, porque nenhuma thread vai segurar B enquanto espera por A. Sem o ciclo, o deadlock não acontece e o programa sempre progride.
+
+## Instruções de Execução
+
+Requisitos: Python 3.10+ (testado em Python 3.13). Usa apenas a biblioteca padrão (`threading`, `time`, `random`).
+
+```
+# Parte 1 - Jantar dos Filosofos
+python PARTE1-FILOSOFOS/filosofos.py     # digite 1 (com conflito) ou 2 (corrigida)
+
+# Parte 2 - Threads e Semaforos
+python PARTE2-SEMAFORO/semaforo.py       # executa as duas versoes em sequencia
+
+# Parte 3 - Deadlock
+python PARTE3-DEADLOCK/deadlock.py       # digite 1 (trava) ou 2 (corrigida)
+```
